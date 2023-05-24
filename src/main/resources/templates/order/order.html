@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="parts/common :: head"></head>
+
+<body>
+<div th:insert="~{parts/common :: scripts}"></div>
+<div th:replace="parts/common :: navbar"></div>
+
+<div id="container">
+    <div class="container mt-5 pb-5">
+        <form action="/order" method="post" enctype="multipart/form-data">
+        <p class="h4 mb-4 text-center">Оформление заказа</p>
+        <br>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Имя:</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="firstName" th:value="${lastOrder} ? ${lastOrder.firstName} : ''"
+                                   class="form-control" th:classappend="${firstNameError} ? ' is-invalid'" />
+                            <div th:if="${firstNameError}" class="invalid-feedback" th:text="${firstNameError}"></div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Фамилия:</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="lastName" th:value="${lastOrder} ? ${lastOrder.lastName} : ''"
+                                   class="form-control" th:classappend="${lastNameError} ? ' is-invalid'" />
+                            <div th:if="${lastNameError}" class="invalid-feedback" th:text="${lastNameError}"></div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Город:</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="city" th:value="${lastOrder} ? ${lastOrder.city} : ''"
+                                   class="form-control" th:classappend="${cityError} ? ' is-invalid'" />
+                            <div th:if="${cityError}" class="invalid-feedback" th:text="${cityError}"></div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Адрес:</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="address" th:value="${lastOrder} ? ${lastOrder.address} : ''"
+                                   class="form-control" th:classappend="${addressError} ? ' is-invalid'" />
+                            <div th:if="${addressError}" class="invalid-feedback" th:text="${addressError}"></div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Индекс:</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="postIndex" th:value="${lastOrder} ? ${lastOrder.postIndex} : ''"
+                                   class="form-control" th:classappend="${postIndexError} ? ' is-invalid'"/>
+                            <div th:if="${postIndexError}" class="invalid-feedback" th:text="${postIndexError}"></div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Телефон:</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="phoneNumber" th:value="${lastOrder} ? ${lastOrder.phoneNumber} : ''"
+                                   class="form-control" th:classappend="${phoneNumberError} ? ' is-invalid'" placeholder="380__ ___ __ __"/>
+                            <div th:if="${phoneNumberError}" class="invalid-feedback" th:text="${phoneNumberError}"></div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Email:</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="email" th:value="${lastOrder} ? ${lastOrder.email} : ''"
+                                   class="form-control" th:classappend="${emailError} ? ' is-invalid'" placeholder="exemple@email.com"/>
+                            <div th:if="${emailError}" class="invalid-feedback" th:text="${emailError}"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="container-fluid">
+                        <div class="row" th:fragment="list">
+                            <div class="col-lg-6 d-flex align-items-stretch" th:each="good : ${goods}">
+                                <div class="card mb-5" th:if="${good.getFilename()}">
+                                    <img th:src="@{/static/uploads/{path} (path = ${good.getFilename()})}" class="rounded mx-auto w-50">
+                                    <div class="card-body text-center">
+                                        <h5 th:text="${good.getTitle()}"></h5>
+                                        <h6 th:text="${good.getVolume()}"></h6>
+                                        <h6><span th:text="${good.getPrice()}"></span>,00 р.</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <button class="btn btn-primary btn-lg btn-success px-5 float-right">Подтвердить заказ</button>
+                        <input type="hidden" name="totalPrice" th:value="${#aggregates.sum(goods.![price])}">
+                    <div class="row">
+                        <p> </p>
+                        <h4>К оплате : <span th:text="${#aggregates.sum(goods.![price])}"></span> р.</h4>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer th:insert="~{parts/common :: footer}"></footer>
+
+</body>
+</html>

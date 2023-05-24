@@ -1,0 +1,117 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="parts/common :: head"></head>
+
+<body>
+<div th:insert="~{parts/common :: scripts}"></div>
+<div th:replace="parts/common :: navbar"></div>
+
+<div id="container">
+    <div class="container" >
+        <div th:replace="parts/common :: userNavbar"></div>
+    </div>
+
+    <div class="container mt-5 pb-5">
+        <form method="post" action="/user/add" enctype="multipart/form-data">
+            <h5>Заполните форму</h5>
+            <br>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Название продукта:</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="Title" th:value="${good} ? ${good.title} : ''"
+                               class="form-control" th:classappend="${goodTitleError} ? ' is-invalid'" />
+                        <div th:if="${goodTitleError}" class="invalid-feedback" th:text="${goodTitleError}"></div>
+                    </div>
+                </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Производитель:</label>
+                <div class="col-sm-6">
+                    <input type="text" name="producer" th:value="${good} ? ${good.producer} : ''"
+                           class="form-control" th:classappend="${producerError} ? ' is-invalid'" />
+                    <div th:if="${producerError}" class="invalid-feedback" th:text="${producerError}"></div>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Место выпаса:</label>
+                <div class="col-sm-6">
+                    <input type="text" name="country" th:value="${good} ? ${good.country} : ''"
+                           class="form-control" th:classappend="${countryError} ? ' is-invalid'" />
+                    <div th:if="${countryError}" class="invalid-feedback" th:text="${countryError}"></div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Тип:</label>
+                <div class="col-sm-6">
+                    <input type="text" name="type" th:value="${good} ? ${good.type} : ''"
+                           class="form-control" th:classappend="${typeError} ? ' is-invalid'" />
+                    <div th:if="${typeError}" class="invalid-feedback" th:text="${typeError}"></div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Вес:</label>
+                <div class="col-sm-6">
+                    <input type="text" name="volume" th:value="${good} ? ${good.volume} : ''"
+                           class="form-control" th:classappend="${volumeError} ? ' is-invalid'" />
+                    <div th:if="${volumeError}" class="invalid-feedback" th:text="${volumeError}"></div>
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Количество:</label>
+                <div class="col-sm-6">
+                    <input type="text" name="count" class="form-control" th:classappend="${countError} ? ' is-invalid'" />
+                    <div th:if="${countError}" class="invalid-feedback" th:text="${countError}"></div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Порода:</label>
+                <div class="col-sm-6">
+                    <input type="text" name="breed" th:value="${good} ? ${good.breed} : ''"
+                           class="form-control" th:classappend="${breedError} ? ' is-invalid'" />
+                    <div th:if="${breedError}" class="invalid-feedback" th:text="${breedError}"></div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Условия хранения:</label>
+                <div class="col-sm-6">
+                    <input type="text" name="stash" th:value="${good} ? ${good.stash} : ''"
+                           class="form-control" th:classappend="${stashError} ? ' is-invalid'" />
+                    <div th:if="${stashError}" class="invalid-feedback" th:text="${stashError}"></div>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Цена:</label>
+                <div class="col-sm-6">
+                    <input type="text" name="price" th:value="${good} ? ${good.price} : ''"
+                           class="form-control" th:classappend="${priceError} ? ' is-invalid'" />
+                    <div th:if="${priceError}" class="invalid-feedback" th:text="${priceError}"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Описание</label>
+                <textarea class="form-control col-sm-8" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-dark">Добавить</button>
+
+            <input type="file" name="file">
+
+        </form>
+    </div>
+</div>
+
+<footer th:insert="~{parts/common :: footer}"></footer>
+</body>
+</html>

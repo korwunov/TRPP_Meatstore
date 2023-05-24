@@ -1,0 +1,24 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="parts/common :: head"></head>
+
+<body>
+<div th:insert="~{parts/common :: scripts}"></div>
+<div th:replace="parts/common :: navbar"></div>
+
+<div class="container">
+  <div th:replace="parts/common :: userNavbar"></div>
+</div>
+
+<div class="container">
+  <form action="/orderupdate" method="post" >
+    <input type="text" name="status" th:value="${order.getStatus()}">
+    <input type="hidden" th:value="${order.getId()}" name="orderId">
+    <button type="submit">Сохранить</button>
+  </form>
+</div>
+
+<footer th:insert="~{parts/common :: footer}"></footer>
+</body>
+</html>

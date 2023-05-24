@@ -1,0 +1,217 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="parts/common :: head"></head>
+
+<body>
+<div th:insert="~{parts/common :: scripts}"></div>
+<div th:replace="parts/common :: navbar"></div>
+
+
+
+<div id="container">
+    <div class="container">
+        <div class="d-flex">
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3>Мясо</h3>
+                </div>
+
+                <form action="/menu/search" method="get">
+<!--                <form th:action="@{/menu/price/{path} (path = ${search})}" method="get">-->
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary ml-auto d-inline-block bg-success" style="width: 80px;">Найти</button>
+                    <a href="/menu" class="btn btn-secondary ml-2 d-inline-block" role="button" style="width: 100px;">Сбросить</a>
+                </div>
+
+                <ul class="list-unstyled components">
+
+                    <li class="active">
+                        <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Цена</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu1" >
+                            <li>
+                                <div class="form-row form-group">
+                                    <div class="col">
+                                        <input type="text" name="startingPrice" class="form-control"  id="value" th:value="${minGoodPrice}"/>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" name="endingPrice" class="form-control" th:value="${maxGoodPrice}" />
+                                    </div>
+                                </div>
+                                <input type="range" th:min="${minGoodPrice}" th:max="${maxGoodPrice}" th:value="${minGoodPrice}"
+                                       class="custom-range" oninput="updateTextInput(this.value);">
+                                <script>
+                                    function updateTextInput(val) {
+                                        document.getElementById('value').value=val;
+                                    }
+                                </script>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="active">
+                        <a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Категории</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu2">
+                            <li>
+                                <div class="checkbox ml-3">
+                                    <label>
+                                        <input type="checkbox" th:name="${'type'}" th:value="${'Баранина'}" >
+                                        <span class="cr"><i class="cr-icon fas fa-check"></i></span>
+                                        Баранина
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox ml-3">
+                                    <label>
+                                        <input type="checkbox" name="type" value="Говядина">
+                                        <span class="cr"><i class="cr-icon fas fa-check"></i></span>
+                                        Говядина
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox ml-3">
+                                    <label>
+                                        <input type="checkbox" name="type" value="Курица">
+                                        <span class="cr"><i class="cr-icon fas fa-check"></i></span>
+                                        Курица
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Производитель</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu3">
+                            <li>
+                                <div class="checkbox ml-3">
+                                    <label>
+                                        <input type="checkbox" th:name="${'producers'}" th:value="${'Фермерское хозяйство'}" >
+                                        <span class="cr"><i class="cr-icon fas fa-check"></i></span>
+                                        Фермерское хозяйство
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox ml-3">
+                                    <label>
+                                        <input type="checkbox" name="producers" value="Свежее мясо">
+                                        <span class="cr"><i class="cr-icon fas fa-check"></i></span>
+                                        Свежее мясо
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox ml-3">
+                                    <label>
+                                        <input type="checkbox" name="producers" value="Мясокомбинат">
+                                        <span class="cr"><i class="cr-icon fas fa-check"></i></span>
+                                        Мясокомбинат
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox ml-3">
+                                    <label>
+                                        <input type="checkbox" name="producers" value="Фермерский кооператив">
+                                        <span class="cr"><i class="cr-icon fas fa-check"></i></span>
+                                        Фермерский кооператив
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="active">
+                        <a href="#homeSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Порода</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu4">
+                            <li>
+                                <div class="checkbox ml-3">
+                                    <label>
+                                        <input type="checkbox" name="breed" th:value="${'Ангус'}">
+                                        <span class="cr"><i class="cr-icon fas fa-check"></i></span>
+                                        Ангус
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox ml-3">
+                                    <label>
+                                        <input type="checkbox" name="breed" th:value="${'Романов'}">
+                                        <span class="cr"><i class="cr-icon fas fa-check"></i></span>
+                                        Романов
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox ml-3">
+                                    <label>
+                                        <input type="checkbox" name="breed" th:value="${'Дюрок'}">
+                                        <span class="cr"><i class="cr-icon fas fa-check"></i></span>
+                                        Дюрок
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox ml-3">
+                                    <label>
+                                        <input type="checkbox" name="breed" th:value="${'Черноморская'}">
+                                        <span class="cr"><i class="cr-icon fas fa-check"></i></span>
+                                        Черноморская
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox ml-3">
+                                    <label>
+                                        <input type="checkbox" name="breed" th:value="${'Дорпер'}">
+                                        <span class="cr"><i class="cr-icon fas fa-check"></i></span>
+                                        Дорпер
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox ml-3">
+                                    <label>
+                                        <input type="checkbox" name="breed" th:value="${'Брахма'}">
+                                        <span class="cr"><i class="cr-icon fas fa-check"></i></span>
+                                        Брахма
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                </form>
+            </nav>
+
+            <div class="row mt-5 ml-5">
+                <div th:insert="~{parts/common :: pagination}"></div>
+                    <div class="container-fluid mt-5">
+                        <div class="row" th:fragment="list">
+                            <div class="col-lg-3 d-flex align-items-stretch" th:each="good : ${page.getContent()}">
+                                <div class="card mb-5" th:if="${good.getFilename()}">
+                                    <img th:src="@{/static/uploads/{path} (path = ${good.getFilename()})}" class="rounded mx-auto w-50">
+                                    <div class="card-body text-center">
+                                        <h5 th:text="${good.getTitle()}"></h5>
+                                        <h6 th:text="${good.getDescription()}"></h6>
+                                        <h6><span th:text="${good.getPrice()}"></span>,00 р.</h6>
+                                    </div>
+                                    <div class="text-center align-items-end mb-3">
+                                        <a th:href="@{/product/{path} (path = ${good.getId()})}" class="btn btn-dark">Купить</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+<footer th:insert="~{parts/common :: footer}"></footer>
+
+</body>
+</html>

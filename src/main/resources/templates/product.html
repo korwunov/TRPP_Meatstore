@@ -1,0 +1,60 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="parts/common :: head"></head>
+
+<body>
+<div th:insert="~{parts/common :: scripts}"></div>
+<div th:replace="parts/common :: navbar"></div>
+
+<div id="container">
+    <div class="container mt-5 pb-5">
+        <div class="row">
+
+            <div class="col-md-5">
+                <div>
+                    <img th:src="@{/static/uploads/{path} (path = ${good.getFilename()})}" class="rounded mx-auto w-100">
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <h2 th:text="${good.getTitle()}"></h2>
+                <h3 th:text="${good.getProducer()}"></h3>
+                <p>Код товара: <span th:text="${good.getId()}"></span></p>
+                <p style="color: #54C0A1">Есть в наличии</p>
+
+                <div class="row ml-1">
+                    <h6 class="mr-5"><span th:text="${good.getPrice()}"></span>,00 р.</h6>
+<!--                    <label class="px-3">Количество:</label>-->
+
+                    <form action="/cart/back" method="post">
+<!--                        <input type="text" name="amount" placeholder="1">-->
+                        <button type="submit" name="add" class="btn btn-dark mx-3"
+                                th:value="${good.getId()}">В корзину</button>
+                    </form>
+                    <form action="/cart/add" method="post">
+                        <!--                        <input type="text" name="amount" placeholder="1">-->
+                        <button type="submit" name="add" class="btn btn-dark mx-3"
+                                th:value="${good.getId()}">Купить в 1 клик</button>
+                    </form>
+                </div>
+                <br>
+                <table class="table">
+                    <tbody>
+                        <tr><td>Название продукта:</td><td th:text="${good.getTitle()}"></td></tr>
+                        <tr><td>Производитель:</td><td th:text="${good.getProducer()}"></td></tr>
+                        <tr><td>Тип:</td><td th:text="${good.getType()}"></td></tr>
+                        <tr><td>Вес:</td><td><span th:text="${good.getVolume()}"></span> кг.</td></tr>
+                        <tr><td>Место выпаса: </td><td th:text="${good.getCountry()}"></td></tr>
+                        <tr><td>Порода: </td><td th:text="${good.getBreed()}"></td></tr>
+                        <tr><td>Температуры хранения: </td><td th:text="${good.getStash()}"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:insert="~{parts/common :: footer}"></footer>
+</body>
+</html>
